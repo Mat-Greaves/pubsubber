@@ -60,6 +60,7 @@ func subscribeAndListen(ctx context.Context, project string, topic string) error
 	defer sub.Delete(context.Background())
 	fmt.Printf("Listening for messages on: %s\n", config.Topic)
 	err = sub.Receive(ctx, func(ctx context.Context, m *pubsub.Message) {
+		fmt.Println(m.Attributes)
 		fmt.Println(string(m.Data))
 		m.Ack()
 	})
